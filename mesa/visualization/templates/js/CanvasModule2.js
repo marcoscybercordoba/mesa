@@ -1,11 +1,11 @@
-var CanvasHexModule = function(canvas_width, canvas_height, grid_width, grid_height) {
+var CanvasModule = function(canvas_width, canvas_height, grid_width, grid_height) {
 	// Create the element
 	// ------------------
 
 	// Create the tag with absolute positioning :
-	var canvas_tag = '<canvas width="${canvas_width}" height="${canvas_height}" class="world-grid"/>'
+	var canvas_tag = '<canvas  />'
 
-	var parent_div_tag = '<div style="height:' + canvas_height + 'px;" class="world-grid-parent"></div>'
+	var parent_div_tag = '<div ></div>'
 
 	// Append it to body:
 	var canvas = $(canvas_tag)[0];
@@ -17,18 +17,18 @@ var CanvasHexModule = function(canvas_width, canvas_height, grid_width, grid_hei
 	parent.append(canvas);
 	parent.append(interaction_canvas);
 
-	// Create the context and the drawing controller:
+	// Create the context for the agents and interactions and the drawing controller:
 	var context = canvas.getContext("2d");
 
+	// Create an interaction handler using the
 	var interactionHandler = new InteractionHandler(canvas_width, canvas_height, grid_width, grid_height, interaction_canvas.getContext("2d"));
-
-	var canvasDraw = new HexVisualization(canvas_width, canvas_height, grid_width, grid_height, context, interactionHandler);
+	var canvasDraw = new GridVisualization(canvas_width, canvas_height, grid_width, grid_height, context, interactionHandler);
 
 	this.render = function(data) {
 		canvasDraw.resetCanvas();
 		for (var layer in data)
 			canvasDraw.drawLayer(data[layer]);
-		  canvasDraw.drawGridLines("#eee");
+		canvasDraw.drawGridLines("#eee");
 	};
 
 	this.reset = function() {

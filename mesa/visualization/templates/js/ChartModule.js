@@ -1,7 +1,9 @@
 var ChartModule = function(series, canvas_width, canvas_height) {
     // Create the tag:
+    //alert("Crea ChartModule")
     var canvas_tag = "<canvas width='" + canvas_width + "' height='" + canvas_height + "' ";
     canvas_tag += "style='border:1px dotted'></canvas>";
+    //canvas_tag += "style='border:1px dotted; display: block' tk='5' class='chartjs-render-monitor'></canvas>";
     // Append it to #elements
     var canvas = $(canvas_tag)[0];
     $("#elements").append(canvas);
@@ -75,6 +77,7 @@ var ChartModule = function(series, canvas_width, canvas_height) {
     });
 
     this.render = function(data) {
+	//alert("render ChartModule")
         chart.data.labels.push(control.tick);
         for (i = 0; i < data.length; i++) {
             chart.data.datasets[i].data.push(data[i]);
